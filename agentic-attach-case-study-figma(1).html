@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agentic Attach: a confidence-aware accessory experience for Ask Blue, Best Buy's agentic shopping assistant.">
+  <title>Agentic Attach | Suyash Krishna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #131a20;
+      --muted: #5b6670;
+      --line: #dce1e5;
+      --blue: #064fce;
+      --blue-deep: #092f6b;
+      --blue-wash: #edf4ff;
+      --yellow: #ffe500;
+      --paper: #fff;
+      --soft: #f5f7f8;
+      --green: #16814c;
+      --amber: #b87800;
+      --red: #bf4e3f;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.58 "DM Sans", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3, .display { font-family: "Space Grotesk", "Helvetica Neue", sans-serif; }
+    h1 { max-width: 850px; margin: 0 0 22px; font-size: clamp(3.1rem, 7vw, 6rem); line-height: .98; font-weight: 500; }
+    h2 { margin: 0 0 16px; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.04; font-weight: 500; }
+    h3 { margin: 0 0 10px; font-size: 1.13rem; line-height: 1.25; font-weight: 600; }
+    p { color: var(--muted); }
+    .wrap { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
+    .topbar-inner { min-height: 62px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .brand-mark { width: 25px; height: 25px; display: grid; place-items: center; background: var(--yellow); font: 700 12px/1 "Space Grotesk", sans-serif; }
+    nav { display: flex; align-items: center; gap: 23px; }
+    nav a { color: var(--muted); font-size: .82rem; text-decoration: none; }
+    nav a:hover { color: var(--blue); }
+    .hero { position: relative; overflow: hidden; padding: 86px 0 58px; border-bottom: 1px solid var(--line); }
+    .hero::after { position: absolute; top: 0; right: 0; bottom: 0; width: min(36vw, 420px); content: ""; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0 31px, rgba(6,79,206,.08) 31px 32px), repeating-linear-gradient(90deg, transparent 0 31px, rgba(6,79,206,.08) 31px 32px); mask-image: linear-gradient(90deg, transparent, #000); }
+    .hero-content { position: relative; z-index: 1; }
+    .eyebrow, .section-kicker { color: var(--blue-deep); font-size: .75rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+    .eyebrow::before { width: 9px; height: 9px; content: ""; background: var(--yellow); }
+    .hero-subtitle { max-width: 840px; margin-bottom: 34px; color: #36414a; font-size: clamp(1.13rem, 2vw, 1.4rem); line-height: 1.45; }
+    .meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 928px; padding-top: 20px; border-top: 2px solid var(--ink); gap: 20px 36px; }
+    .meta dt { margin-bottom: 5px; color: var(--muted); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .meta dd { max-width: 240px; margin: 0; font-size: .9rem; font-weight: 600; }
+    .section { padding: 78px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
+    .section-head { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 24px; margin-bottom: 34px; }
+      .section-head { grid-template-columns: 150px minmax(0, 1fr); }
+    .section-kicker { padding-top: 8px; white-space: nowrap; }
+    .section-head p { max-width: 760px; margin: 0; font-size: 1.02rem; }
+    .section-head h2 { max-width: 840px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .copy { max-width: 710px; }
+    .copy p:last-child { margin-bottom: 0; }
+    .bullets { margin: 0; padding: 0; list-style: none; }
+    .bullets li { position: relative; padding: 12px 0 12px 24px; border-top: 1px solid var(--line); color: var(--muted); }
+    .bullets li::before { position: absolute; left: 1px; content: "+"; color: var(--blue); font-weight: 700; }
+    .problem-quote { margin: 0 0 24px; padding: 20px 22px; border-left: 4px solid var(--yellow); background: var(--soft); color: var(--ink); font: 500 1.24rem/1.35 "Space Grotesk", sans-serif; }
+    .problem-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 0 42px; }
+    .list-panel { padding-top: 17px; border-top: 2px solid var(--ink); }
+    .list-panel .bullets li:last-child { border-bottom: 1px solid var(--line); }
+    .revenue-context { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 18px; }
+    .revenue-stat { position: relative; overflow: hidden; min-height: 155px; padding: 20px; border: 1px solid var(--line); background: linear-gradient(135deg, #fff 60%, var(--blue-wash)); }
+    .revenue-stat::after { position: absolute; right: -15px; bottom: -27px; width: 94px; height: 94px; border: 1px solid rgba(6,79,206,.18); border-radius: 50%; content: ""; }
+    .revenue-stat strong { display: block; color: var(--blue-deep); font: 500 clamp(2.3rem, 4vw, 3.3rem)/1 "Space Grotesk", sans-serif; }
+    .revenue-stat span { display: block; max-width: 230px; margin-top: 11px; color: var(--muted); font-size: .82rem; }
+    .fineprint { margin: 0; color: var(--muted); font-size: .76rem; }
+    .goal-card { min-height: 185px; padding: 21px; border-top: 4px solid var(--blue); background: var(--soft); }
+    .goal-card:nth-child(2) { border-color: var(--yellow); }
+    .goal-card:nth-child(3) { border-color: var(--green); }
+    .goal-card .label { display: block; margin-bottom: 20px; color: var(--blue-deep); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .goal-card p { margin: 0; font-size: .9rem; }
+    .hypothesis { display: grid; grid-template-columns: 140px 1fr; gap: 22px; margin: 28px 0; padding: 24px; border: 1px solid var(--line); }
+    .hypothesis b { color: var(--blue); font: 600 .82rem/1.4 "Space Grotesk", sans-serif; text-transform: uppercase; }
+    .hypothesis p { margin: 0; color: var(--ink); font-size: 1.02rem; }
+    .metric-table { width: 100%; border-collapse: collapse; }
+    .metric-table th, .metric-table td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .metric-table th { color: var(--muted); font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; }
+    .metric-table td:first-child { width: 190px; color: var(--ink); font-weight: 700; }
+    .scope-band { display: grid; grid-template-columns: 150px 1fr; gap: 24px; margin-top: 22px; padding: 21px 22px; background: var(--blue-deep); color: #fff; }
+    .scope-band strong { color: var(--yellow); font: 600 .79rem/1.4 "Space Grotesk", sans-serif; text-transform: uppercase; }
+    .scope-band p { margin: 0; color: #fff; font-size: .91rem; }
+    .gate { display: grid; grid-template-columns: 1fr 48px 1fr 48px 1fr 48px 1fr; align-items: stretch; gap: 10px; margin: 30px 0; }
+    .gate-node { min-height: 130px; padding: 17px; border: 1px solid var(--line); background: #fff; }
+    .gate-node .node-label { display: block; margin-bottom: 17px; color: var(--blue); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .gate-node strong { display: block; margin-bottom: 7px; font: 600 1rem/1.2 "Space Grotesk", sans-serif; }
+    .gate-node p { margin: 0; font-size: .79rem; line-height: 1.42; }
+    .gate-arrow { display: grid; place-items: center; color: var(--blue); font: 500 1.5rem/1 "Space Grotesk", sans-serif; }
+    .confidence-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .confidence-card { min-height: 280px; padding: 22px; border-radius: 4px; background: #272d32; color: #fff; }
+    .confidence-card.mid { background: #f5f7f8; color: var(--ink); border: 1px solid var(--line); }
+    .confidence-card.low { background: #e9f0f7; color: var(--ink); }
+    .confidence-card .tier { display: block; margin-bottom: 28px; color: var(--yellow); font: 600 .76rem/1 "Space Grotesk", sans-serif; text-transform: uppercase; }
+    .confidence-card.mid .tier { color: var(--amber); }
+    .confidence-card.low .tier { color: var(--blue); }
+    .confidence-card h3 { margin-bottom: 14px; font-size: 1.2rem; }
+    .confidence-card p { margin: 0; color: inherit; font-size: .9rem; opacity: .82; }
+    .confidence-card .decision { display: block; margin-top: 24px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.24); color: inherit; font-size: .75rem; font-weight: 700; }
+    .confidence-card.mid .decision, .confidence-card.low .decision { border-color: var(--line); }
+    .decision-caption { margin: 18px 0 0; padding-left: 16px; border-left: 3px solid var(--yellow); font: 500 1.02rem/1.5 "Space Grotesk", sans-serif; color: var(--ink); }
+    .journey-track { display: grid; grid-template-columns: repeat(4, 1fr); margin: 8px 0 40px; }
+    .journey-stop { position: relative; min-height: 110px; padding: 16px 14px 16px 0; border-top: 2px solid var(--blue); }
+    .journey-stop::before { position: absolute; top: -7px; left: 0; width: 11px; height: 11px; border: 2px solid var(--blue); border-radius: 50%; background: var(--paper); content: ""; }
+    .journey-stop:last-child { border-top: 0; }
+    .journey-stop:last-child::before { top: -6px; }
+    .journey-stop strong { display: block; margin-bottom: 7px; font: 600 .92rem/1.3 "Space Grotesk", sans-serif; }
+    .journey-stop span { display: block; max-width: 220px; color: var(--muted); font-size: .79rem; }
+    .screen-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .screen-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); background: #fafbfc; }
+    .screen-visual { height: 700px; display: flex; justify-content: center; overflow: auto; padding: 14px; border-bottom: 1px solid var(--line); background: #f2f4f6; scrollbar-color: #9ba8b4 #e8edf2; }
+      .screen-visual:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+      .screen-visual::-webkit-scrollbar { width: 9px; }
+      .screen-visual::-webkit-scrollbar-track { background: #e8edf2; }
+      .screen-visual::-webkit-scrollbar-thumb { border: 2px solid #e8edf2; border-radius: 8px; background: #9ba8b4; }
+    .screen-visual img { width: min(100%, 390px); height: auto; align-self: flex-start; border: 1px solid #c9d0d7; border-radius: 8px; background: #fff; box-shadow: 0 5px 18px rgba(16, 24, 32, .12); }
+    .screen-copy { min-height: 180px; padding: 18px; }
+    .screen-copy .tag { display: block; margin-bottom: 10px; color: var(--blue); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .screen-copy p { margin: 0; font-size: .84rem; }
+    .atc-intro { display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: start; margin-bottom: 28px; }
+    .atc-flag { padding: 14px; background: var(--yellow); color: var(--ink); font: 600 .77rem/1.35 "Space Grotesk", sans-serif; text-transform: uppercase; }
+    .atc-intro p { margin: 0; font-size: 1.02rem; }
+    .state-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .state-card { overflow: hidden; border: 1px solid var(--line); background: #fff; }
+    .state-card img { width: 100%; height: 370px; padding: 12px; object-fit: contain; object-position: top center; background: #f2f4f6; }
+    .state-copy { min-height: 180px; padding: 18px; }
+    .state-copy .state { display: block; margin-bottom: 10px; color: var(--blue); font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+    .state-copy p { margin: 0; font-size: .84rem; }
+    .postcart-rule { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; padding: 14px 16px; background: var(--soft); }
+    .postcart-rule b { margin-right: 5px; font-size: .8rem; }
+    .rule-chip { padding: 5px 10px; border: 1px solid var(--line); background: #fff; color: var(--muted); font-size: .72rem; }
+    .system-map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); }
+    .system-item { min-height: 150px; padding: 20px; border-right: 1px solid var(--line); }
+    .system-item:last-child { border-right: 0; }
+    .system-item .symbol { display: grid; width: 36px; height: 36px; margin-bottom: 20px; place-items: center; background: var(--blue-wash); color: var(--blue); font: 600 1.1rem/1 "Space Grotesk", sans-serif; }
+    .system-item strong { display: block; margin-bottom: 6px; font-size: .88rem; }
+    .system-item p { margin: 0; font-size: .78rem; }
+    .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .roadmap-col { padding: 20px; border-top: 4px solid var(--blue); background: var(--soft); }
+    .roadmap-col:nth-child(2) { border-color: var(--amber); }
+    .roadmap-col:nth-child(3) { border-color: var(--green); }
+    .roadmap-col .phase { display: block; margin-bottom: 17px; color: var(--blue); font-size: .69rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .roadmap-col:nth-child(2) .phase { color: var(--amber); }
+    .roadmap-col:nth-child(3) .phase { color: var(--green); }
+    .roadmap-col ul { margin: 0; padding-left: 17px; color: var(--muted); font-size: .83rem; }
+    .roadmap-col li { margin: 9px 0; }
+    .status-panel { display: grid; grid-template-columns: 1fr 180px; gap: 30px; align-items: center; padding: 28px; background: var(--blue-deep); color: #fff; }
+    .status-panel h3 { color: #fff; font-size: 1.45rem; }
+    .status-panel p { max-width: 700px; margin: 0; color: rgba(255,255,255,.82); }
+    .status-stamp { padding: 15px; border: 1px solid rgba(255,255,255,.4); color: var(--yellow); font: 600 .75rem/1.4 "Space Grotesk", sans-serif; text-align: center; text-transform: uppercase; }
+    .learned { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 18px; }
+    .learned-item { padding: 18px; border: 1px solid var(--line); }
+    .learned-item strong { display: block; margin-bottom: 5px; font: 600 .95rem/1.3 "Space Grotesk", sans-serif; }
+    .learned-item p { margin: 0; font-size: .82rem; }
+    .closing { padding: 48px; background: var(--yellow); }
+    .closing p { max-width: 850px; margin: 0; color: var(--ink); font: 500 clamp(1.5rem, 3vw, 2.5rem)/1.24 "Space Grotesk", sans-serif; }
+    .source { padding: 22px 0 0; color: var(--muted); font-size: .77rem; }
+    .source a { color: var(--blue); font-weight: 600; }
+    footer { padding: 24px 0 45px; color: var(--muted); font-size: .8rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; }
+    footer p { margin: 0; }
+    .reveal { animation: enter .55s ease-out both; }
+    @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 850px) {
+      .hero { padding-top: 66px; }
+      .section { padding: 62px 0; }
+      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gate { grid-template-columns: 1fr 34px 1fr; }
+      .gate-node:nth-of-type(n+5), .gate-arrow:nth-of-type(n+6) { margin-top: 8px; }
+      .gate-node:nth-of-type(5) { grid-column: 1; }
+      .gate-arrow:nth-of-type(6) { grid-column: 2; }
+      .gate-node:nth-of-type(7) { grid-column: 3; }
+      .system-map { grid-template-columns: 1fr 1fr; }
+      .system-item:nth-child(2) { border-right: 0; }
+      .system-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(calc(100% - 36px), var(--max)); }
+      nav { gap: 12px; }
+      nav a { font-size: .7rem; }
+      nav a:nth-child(2) { display: none; }
+      .brand { font-size: .77rem; }
+      .hero { padding: 54px 0 42px; }
+      .hero::after { width: 56vw; opacity: .7; }
+      .meta-grid { grid-template-columns: 1fr 1fr; gap: 17px 22px; }
+      .section { padding: 54px 0; }
+      .section-head { grid-template-columns: 1fr; gap: 9px; margin-bottom: 27px; }
+      .section-kicker { padding-top: 0; }
+      .two-col, .problem-columns { grid-template-columns: 1fr; gap: 28px; }
+      .three-col, .confidence-cards, .screen-grid, .state-grid, .roadmap { grid-template-columns: 1fr; }
+      .revenue-context { gap: 8px; }
+      .revenue-stat { min-height: 122px; padding: 13px 10px; }
+      .revenue-stat strong { font-size: 1.8rem; }
+      .revenue-stat span { margin-top: 8px; font-size: .69rem; }
+      .hypothesis { grid-template-columns: 1fr; gap: 8px; padding: 18px; }
+      .metric-table th, .metric-table td { padding: 10px 8px; font-size: .78rem; }
+      .metric-table td:first-child { width: 116px; }
+      .scope-band { grid-template-columns: 1fr; gap: 9px; }
+      .gate { grid-template-columns: 1fr; gap: 8px; }
+      .gate-node { min-height: 0; }
+      .gate-node .node-label { margin-bottom: 9px; }
+      .gate-arrow { min-height: 18px; transform: rotate(90deg); }
+      .gate-node:nth-of-type(n+5), .gate-arrow:nth-of-type(n+6) { margin-top: 0; }
+      .gate-node:nth-of-type(5), .gate-arrow:nth-of-type(6), .gate-node:nth-of-type(7) { grid-column: auto; }
+      .confidence-card { min-height: 0; }
+      .confidence-card .tier { margin-bottom: 17px; }
+      .journey-track { grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+      .journey-stop { min-height: 102px; }
+      .atc-intro { grid-template-columns: 1fr; gap: 13px; }
+      .atc-flag { width: fit-content; }
+      .state-copy { min-height: auto; }
+      .system-item { min-height: 140px; padding: 15px; }
+      .roadmap-col { padding: 18px; }
+      .status-panel { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .status-stamp { max-width: 200px; }
+      .learned { grid-template-columns: 1fr; }
+      .closing { padding: 26px; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (max-width: 390px) {
+      .brand { font-size: .7rem; }
+      nav { gap: 9px; }
+      nav a { font-size: .65rem; }
+      nav a:last-child { display: none; }
+      .revenue-stat strong { font-size: 1.55rem; }
+      .revenue-stat span { font-size: .64rem; }
+      .journey-track { grid-template-columns: 1fr; }
+      .journey-stop { min-height: 78px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+    @media print {
+      .topbar { position: static; }
+      nav { display: none; }
+      .hero, .section { padding-block: 35px; }
+      .reveal { animation: none; }
+    }
+    .state-card { display: flex; flex-direction: column; }
+    .state-visual {
+      height: 760px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      background: #f2f4f6;
+    }
+    .state-card img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      border: 1px solid #c9d0d7;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 5px 18px rgba(16, 24, 32, .12);
+      object-fit: contain;
+    }
+    .state-copy { flex: 1; }
+    @media (max-width: 850px) { .state-visual { height: 700px; } }
+    @media (max-width: 640px) { .state-visual { height: 760px; } }
+    @media (max-width: 390px) { .state-visual { height: 700px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="Back to top"><span class="brand-mark" aria-hidden="true">S</span><span>Suyash Krishna</span></a>
+      <nav aria-label="Case study sections">
+        <a href="#problem">Problem</a>
+        <a href="#approach">Approach</a>
+        <a href="#journey">Journey</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-content reveal">
+        <div class="eyebrow">Case study · Agentic AI</div>
+        <h1>Agentic Attach</h1>
+        <p class="hero-subtitle">Designing a confidence-aware accessory experience for Ask Blue AI, Best Buy’s agentic shopping assistant, helping customers leave with everything they actually need.</p>
+        <dl class="meta-grid">
+          <div class="meta"><dt>Role</dt><dd>Senior Product Designer · 0→1, end-to-end</dd></div>
+          <div class="meta"><dt>Team</dt><dd>Product · Engineering · Data Science</dd></div>
+          <div class="meta"><dt>Platform</dt><dd>Conversational AI · Mobile &amp; Web</dd></div>
+          <div class="meta"><dt>Duration</dt><dd>1.5 months</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">01 / Overview</span><div><h2>Help people buy the setup, not just the product.</h2><p>Ask Blue is Best Buy’s conversational shopping assistant. Agentic Attach, internally “Guided Completion,” brings relevant accessories into the product decision so customers can understand what completes their setup before they commit.</p></div></div>
+        <div class="two-col">
+          <div class="copy"><h3>My contribution</h3><p>I led the end-to-end design, from problem framing and PRD collaboration through interaction design, content strategy, and the confidence-based recommendation framework that Product, Engineering, and Data Science could build against.</p></div>
+          <ul class="bullets">
+            <li>Turned a fuzzy compatibility problem into a shippable MVP scope.</li>
+            <li>Defined confidence-tiered logic for when, and when not, to show accessories.</li>
+            <li>Designed the conversational journey across compare, product detail, reviews, and Add to Cart.</li>
+            <li>Co-authored UX requirements, success metrics, and fallback behavior with Product.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="problem">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">02 / Problem</span><div><h2>Customers realize what’s missing too late.</h2><p>The existing attach experience was an easy-to-miss prompt and a mixed compatibility list, rather than a structured part of the purchase decision.</p></div></div>
+        <blockquote class="problem-quote">“Customers don’t know what they need — until it’s too late.”</blockquote>
+        <div class="problem-columns">
+          <article class="list-panel"><h3>What customers experience</h3><ul class="bullets"><li>They lack a reference for what people in similar situations typically buy.</li><li>They see complementary products only after purchase.</li><li>They underestimate how much accessories improve the experience.</li><li>They struggle to connect a product to the outcome they want.</li><li>They discover required setup items too late.</li></ul></article>
+          <article class="list-panel"><h3>Why the current experience falls short</h3><ul class="bullets"><li>A mixed list makes accessory types hard to distinguish.</li><li>Missing category context makes options difficult to compare.</li><li>Attach feels like an afterthought, not part of the decision.</li><li>The result is incomplete purchases, setup friction, and lower confidence.</li></ul></article>
+        </div>
+        <div class="revenue-context" aria-label="Existing attach revenue context over the last 12 months">
+          <article class="revenue-stat"><strong>$23M</strong><span>PDP attach revenue<br>Last 12 months</span></article>
+          <article class="revenue-stat"><strong>$22M</strong><span>Post-add lightbox revenue<br>Last 12 months</span></article>
+          <article class="revenue-stat"><strong>$33M</strong><span>Cart attach revenue<br>Last 12 months</span></article>
+        </div>
+        <p class="fineprint">Existing channel revenue context from the case-study frame. These are not results attributed to Agentic Attach.</p>
+      </div>
+    </section>
+
+    <section class="section" id="goals">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">03 / Goals</span><div><h2>Make attach easier to notice, understand, and trust.</h2><p>The hypothesis: surface relevant accessories when customers show product interest in chat, during comparison and evaluation, and at Add to Cart. Timely, confidence-aware suggestions can help customers understand what completes their setup and improve attach rate and AOV without eroding trust.</p></div></div>
+        <div class="three-col">
+          <article class="goal-card"><span class="label">Goal 01</span><h3>Increase attach rate &amp; AOV</h3><p>Make relevant accessories easier to discover during product evaluation and at Add to Cart.</p></article>
+          <article class="goal-card"><span class="label">Goal 02</span><h3>Build purchase confidence</h3><p>Clearly present available options so customers do not miss what they need to complete a setup.</p></article>
+          <article class="goal-card"><span class="label">Goal 03</span><h3>Establish a scalable foundation</h3><p>Build a confidence-aware pattern for accessory discovery across the conversational shopping journey.</p></article>
+        </div>
+        <div class="hypothesis"><b>Success measures</b><p><strong>Primary:</strong> attach rate, the share of orders with at least one additional item. <strong>Secondary:</strong> average order value and multi-item add-to-cart rate. <strong>Supporting:</strong> category-level performance versus PDP attach, plus category engagement, drill-down, and product interaction.</p></div>
+        <div class="scope-band"><strong>V1 scope discipline</strong><p>Accessories only · Prompts during product interest and evaluation, plus Add to Cart · Confidence-gated recommendations · Product and category context kept clear. Future opportunities: individual-history personalization, complete-my-setup bundles, broader catalog coverage, and additional entry points.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">04 / Approach</span><div><h2>Gate relevance, not just quantity.</h2><p>Compatibility data already existed. The design gap was deciding when that data was strong enough to act on. I reframed the question from “What can we show?” to “Do we have permission to speak up?”</p></div></div>
+        <div class="gate" aria-label="Recommendation decision flow">
+          <article class="gate-node"><span class="node-label">01 / Understand</span><strong>Product + intent</strong><p>What is the customer evaluating or trying to complete?</p></article>
+          <span class="gate-arrow" aria-hidden="true">→</span>
+          <article class="gate-node"><span class="node-label">02 / Evaluate</span><strong>Evidence quality</strong><p>Co-purchase data, product specifications, and business rules.</p></article>
+          <span class="gate-arrow" aria-hidden="true">→</span>
+          <article class="gate-node"><span class="node-label">03 / Gate</span><strong>Confidence tier</strong><p>Is compatibility confirmed, suggested, or too uncertain?</p></article>
+          <span class="gate-arrow" aria-hidden="true">→</span>
+          <article class="gate-node"><span class="node-label">04 / Respond</span><strong>Show, qualify, or hold</strong><p>Choose a response that protects relevance and trust.</p></article>
+        </div>
+        <div class="confidence-cards">
+          <article class="confidence-card high"><span class="tier">High confidence · Recommend</span><h3>Organize the complete setup</h3><p>For a clear need and strong compatibility signal, group the most impactful accessories into useful categories. Explain why each matters and how the pieces work together.</p><span class="decision">Evidence: co-purchase + specifications + business rules</span></article>
+          <article class="confidence-card mid"><span class="tier">Mid confidence · Qualify</span><h3>Offer, don’t guarantee</h3><p>When co-purchase data suggests relevance but compatibility is not confirmed, present optional or commonly bought-together pairings without implying guaranteed fit.</p><span class="decision">Language: optional / commonly paired</span></article>
+          <article class="confidence-card low"><span class="tier">Low or no confidence · Hold</span><h3>Nothing forced</h3><p>When confidence is low or absent, do not show an accessory suggestion. Keep the conversation and primary task open.</p><span class="decision">Fallback: no speculative attach</span></article>
+        </div>
+        <p class="decision-caption">The confidence framework is the interface: it defines not only what the assistant says, but when it should stay quiet.</p>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">05 / Journey</span><div><h2>An ambient thread through evaluation.</h2><p>Attach is not a destination screen. It appears at meaningful moments in the evaluation loop, so people can discover what complements a product without abandoning the task they came to do.</p></div></div>
+        <div class="journey-track" aria-label="Attach moments in the shopping evaluation journey">
+          <div class="journey-stop"><strong>Compare</strong><span>Offer relevant accessories when comparison shows product interest.</span></div>
+          <div class="journey-stop"><strong>Read reviews</strong><span>Use review questions as a natural prompt to explore a complete setup.</span></div>
+          <div class="journey-stop"><strong>Explore setup</strong><span>Match the recommendation format to compatibility confidence.</span></div>
+          <div class="journey-stop"><strong>Add to Cart</strong><span>Primary attach surface, supported by earlier discovery moments.</span></div>
+        </div>
+        <div class="screen-grid">
+          <article class="screen-card"><div class="screen-visual" role="region" aria-label="Scrollable comparison screen" tabindex="0"><img src="flow-compare.png" alt="Ask Blue compares Samsung and TCL televisions and offers a contextual accessory prompt"></div><div class="screen-copy"><span class="tag">Moment 01 · Compare</span><h3>Open attach from product comparison</h3><p>A relevant follow-up invites accessory discovery without interrupting the customer’s comparison task.</p></div></article>
+          <article class="screen-card"><div class="screen-visual" role="region" aria-label="Scrollable product reviews screen" tabindex="0"><img src="flow-reviews.png" alt="Ask Blue summarizes customer reviews for a Samsung television and offers related follow-up prompts"></div><div class="screen-copy"><span class="tag">Moment 02 · Reviews</span><h3>Carry intent forward from reviews</h3><p>After the customer explores review themes, a low-friction prompt keeps the conversation moving toward a complete setup.</p></div></article>
+          <article class="screen-card"><div class="screen-visual" role="region" aria-label="Scrollable high-confidence accessory recommendation screen" tabindex="0"><img src="flow-categories.png" alt="High-confidence Samsung television recommendations grouped into sound, mounting, and connection categories"></div><div class="screen-copy"><span class="tag">Moment 03 · High confidence</span><h3>Group compatible items by setup need</h3><p>When compatibility is well supported, organize recommendations into categories such as better sound, installation and mounting, and TV connections. Explain why each category helps.</p></div></article>
+          <article class="screen-card"><div class="screen-visual" role="region" aria-label="Scrollable medium-confidence accessory recommendation screen" tabindex="0"><img src="flow-medium-confidence.png" alt="Ask Blue suggests commonly paired soundbar and wall-mount accessories for a Samsung television, with language that makes the suggestions optional"></div><div class="screen-copy"><span class="tag">Moment 03 · Medium confidence</span><h3>Suggest common pairings, not guaranteed fit</h3><p>When purchase patterns suggest relevance but compatibility is not confirmed, show a small optional set. Explain that customers may not need every item and invite them to choose what to explore.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="post-cart">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">06 / Add to Cart</span><div><h2>The primary surface gets the clearest rules.</h2><p>Attach can enter the conversation as soon as a customer shows interest in a product. Add to Cart is the primary surface for a focused recommendation, building on earlier prompts during comparison, product exploration, and reviews without interrupting the purchase confirmation.</p></div></div>
+        <div class="atc-intro"><div class="atc-flag">Primary surface<br>At Add to Cart</div><p>These three states apply the same confidence model at the primary attach moment: a single strong signal earns one clear offer; high confidence earns organized accessory choices; low confidence earns no recommendation. Earlier product-interest prompts use the same relevance and confidence rules.</p></div>
+        <div class="state-grid">
+          <article class="state-card"><div class="state-visual"><img src="postcart-single-recommendation.png" alt="Post-cart mobile screen with purchase confirmation and one protection plan recommendation"></div><div class="state-copy"><span class="state">State 01 · Single strong signal</span><h3>Confirm, then offer one thing</h3><p>For a non-member who adds a TV, lead with one relevant protection-plan recommendation. Keep the value clear and the conversation focused.</p></div></article>
+          <article class="state-card"><div class="state-visual"><img src="postcart-high-confidence.png" alt="Post-cart mobile screen with confirmation and accessory recommendations organized by category"></div><div class="state-copy"><span class="state">State 02 · High confidence</span><h3>Complete the setup</h3><p>Once the TV and protection plan are in cart, show one accessory carousel across soundbars, wall mounts, and cables, with follow-ups to explore the best-fit category.</p></div></article>
+          <article class="state-card"><div class="state-visual"><img src="postcart-low-confidence.png" alt="Post-cart mobile screen confirming the cart without showing an accessory recommendation"></div><div class="state-copy"><span class="state">State 03 · Low confidence</span><h3>Confirm; don’t fill the space</h3><p>When nothing clears the confidence bar, simply confirm the purchase and reopen the conversation. Do not invent a recommendation to occupy the moment.</p></div></article>
+        </div>
+        <div class="postcart-rule"><b>Guardrails</b><span class="rule-chip">Purchase confirmation first</span><span class="rule-chip">Cart remains one tap away</span><span class="rule-chip">One clear recommendation</span><span class="rule-chip">No forced attach</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="system">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">07 / System</span><div><h2>Build a pattern, not a one-off page.</h2><p>Attach spans comparison, product exploration, reviews, and Add to Cart. I designed shared conversational building blocks so each product-interest moment can offer a consistent, confidence-aware path to a more complete setup.</p></div></div>
+        <div class="system-map" aria-label="Reusable conversational design components">
+          <article class="system-item"><span class="symbol" aria-hidden="true">01</span><strong>Category blocks</strong><p>Structured groups give shoppers context for comparison.</p></article>
+          <article class="system-item"><span class="symbol" aria-hidden="true">02</span><strong>Product cards</strong><p>Consistent product details and actions inside conversation.</p></article>
+          <article class="system-item"><span class="symbol" aria-hidden="true">03</span><strong>Prompt pills</strong><p>Suggested next steps keep exploration moving naturally.</p></article>
+          <article class="system-item"><span class="symbol" aria-hidden="true">04</span><strong>Response feedback</strong><p>A shared pattern for improving the assistant's answers.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">08 / Roadmap</span><div><h2>Start focused. Earn the next phase.</h2><p>The MVP is intentionally small: ship the foundation, test the hypothesis, and use evidence to earn broader investment.</p></div></div>
+        <div class="roadmap">
+          <article class="roadmap-col"><span class="phase">Now · MVP</span><h3>Ship the foundation</h3><ul><li>Accessory discovery during product interest and at Add to Cart</li><li>Confidence-gated recommendations and category structure</li><li>One primary product context at a time</li></ul></article>
+          <article class="roadmap-col"><span class="phase">Next</span><h3>Widen the aperture</h3><ul><li>Medium-confidence optional pairings</li><li>More category exploration beyond the initial suggestions</li><li>Additional relevant moments across the shopping journey</li></ul></article>
+          <article class="roadmap-col"><span class="phase">Later</span><h3>Personalize and extend</h3><ul><li>Personalization from customer context and history</li><li>Intent-aware, conversation-driven attach</li><li>ML-driven ranking and lifecycle attach</li></ul></article>
+        </div>
+        <p style="margin:20px 0 0">This seeds “Complete My Setup”: help customers succeed with what they bought. Existing compatibility data makes this a natural evolution of the platform, not a net-new capability.</p>
+      </div>
+    </section>
+
+    <section class="section" id="status">
+      <div class="wrap">
+        <div class="section-head"><span class="section-kicker">09 / Status</span><div><h2>Employee-first rollout is complete.</h2><p>Best Buy employees used the experience first, creating a real-world feedback loop before the customer rollout.</p></div></div>
+        <div class="status-panel"><div><h3>Customers are next.</h3><p>The employee launch created a chance to learn what felt off in day-to-day use before exposing the experience to customers. Customer launch and measured outcomes are not included in this case-study frame.</p></div><div class="status-stamp">Internal rollout<br>Complete</div></div>
+        <div class="learned"><article class="learned-item"><strong>The confidence model is the interface</strong><p>For an AI assistant, design includes the rules for when it should speak up.</p></article><article class="learned-item"><strong>Early PRD partnership changes the product</strong><p>Joining before solution decisions are fixed lets design shape what gets built, not only how it looks.</p></article></div>
+        <div class="closing" style="margin-top:28px"><p>“The most useful recommendation is sometimes the one the assistant chooses not to make.”</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><p>Suyash Krishna · Senior Product Designer</p><p>Agentic Attach · Case study</p></div></footer>
+</body>
+</html>
