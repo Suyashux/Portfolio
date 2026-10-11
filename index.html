@@ -72,6 +72,9 @@
     .project-link:hover { text-decoration: underline; }
     .project-link .icon { transition: transform .18s ease; }
     .project-link:hover .icon { transform: translateX(3px); }
+    .project-preview { display: block; margin-top: 24px; border: 1px solid var(--line); background: var(--accent-soft); overflow: hidden; }
+    .project-preview img { display: block; width: 100%; height: 360px; object-fit: contain; padding: 16px; }
+    @media (max-width: 767px) { .project-preview img { height: 240px; padding: 10px; } }
     .contact { margin: 18px calc(50% - 50vw) 0; padding: 28px max(32px, calc((100vw - 1160px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 28px; background: var(--accent-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .contact-label { color: var(--accent); font-size: 12px; font-weight: 650; }
     .contact h2 { font-size: 20px; margin-top: 4px; }
@@ -170,18 +173,26 @@
           <span class="number" aria-hidden="true">01</span>
           <div>
             <p class="project-meta">Best Buy / Ask Blue AI assistant / Conversational AI</p>
-            <h3>Progressive Login</h3>
+            <h3><a href="Progressive%20login.html">Progressive Login</a></h3>
             <p class="premise">Let shoppers experience the value before asking them to sign in.</p>
             <p class="context">An upfront login kept anonymous shoppers out of Ask Blue AI. I designed a value-first journey with contextual sign-in prompts, so customers can explore recommendations and keep their conversation when they're ready.</p>
+            <a class="project-link" href="Progressive%20login.html">View case study <img class="icon" src="assets/arrow-right.svg" alt=""></a>
+            <a class="project-preview" href="Progressive%20login.html" aria-label="View Progressive Login case study">
+              <img src="images/soft-nudge-web-view.png" alt="Ask Blue on BestBuy.com with an optional sign-in prompt after a product recommendation" loading="lazy">
+            </a>
           </div>
         </article>
         <article class="project">
           <span class="number" aria-hidden="true">02</span>
           <div>
             <p class="project-meta">Best Buy / Ask Blue AI assistant / Agentic commerce</p>
-            <h3>Agentic Attach</h3>
+            <h3><a href="untitled%20folder/agentic-attach-case-study-figma.html">Agentic Attach</a></h3>
             <p class="premise">Help people buy the complete setup, not just the product.</p>
             <p class="context">Shoppers often discover missing accessories after they buy. I designed confidence-aware recommendations that bring relevant add-ons into comparison and cart moments, helping customers understand what they need without pushing what they don't.</p>
+            <a class="project-link" href="untitled%20folder/agentic-attach-case-study-figma.html">View case study <img class="icon" src="assets/arrow-right.svg" alt=""></a>
+            <a class="project-preview" href="untitled%20folder/agentic-attach-case-study-figma.html" aria-label="View Agentic Attach case study">
+              <img src="untitled%20folder/post-cart-scenarios.png" alt="Ask Blue post-cart screens showing purchase confirmation and relevant protection and accessory recommendations" loading="lazy">
+            </a>
           </div>
         </article>
       </section>

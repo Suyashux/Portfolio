@@ -1,8 +1,8 @@
 # Suyash Krishna Portfolio
 
-A light, editorial portfolio homepage in [index.html](index.html), with a concise product-design introduction, updated portrait, LinkedIn link, downloadable CV, company logos, contextual introductions to two Best Buy Ask Blue AI projects, and a contact section with Bangalore, email, and phone details. The homepage has no build step, package dependencies, or JavaScript. Its images and icons live in `assets/`.
+A light, editorial portfolio homepage in [index.html](index.html), with a concise product-design introduction, updated portrait, LinkedIn link, downloadable CV, company logos, screenshot previews and links to two Best Buy Ask Blue AI case studies, and a contact section with Bangalore, email, and phone details. The homepage has no build step, package dependencies, or JavaScript. Its profile images and icons live in `assets/`.
 
-The original case studies are preserved in [Progressive login.html](Progressive%20login.html) and [agentic-attach-case-study-figma(1).html](agentic-attach-case-study-figma(1).html). Their referenced screenshots are not currently present in the workspace; add the original images at the paths each page expects before publishing. The Agentic Attach page also loads its existing fonts from Google Fonts.
+The linked case studies are [Progressive login.html](Progressive%20login.html), with screenshots in `images/`, and [untitled folder/agentic-attach-case-study-figma.html](untitled%20folder/agentic-attach-case-study-figma.html), with screenshots beside the page. Both include navigation back to selected work. Existing file paths are preserved. The Agentic Attach page loads its existing fonts from Google Fonts. The alternate Agentic AI draft is not linked from the homepage.
 
 ## Preview
 
@@ -23,7 +23,7 @@ The following notes concern the Progressive Login case study. Use original Figma
 | `media-wishlist` | Product save and authentication gate | Phase II scope and cancel/success outcomes |
 | `media-chat-close` | Chat-close retention exploration | Distinguish leaving chat from closing a browser tab |
 
-Create an `assets` folder when media is ready. Replace the contents of the corresponding `.media-slot` element with an image, keeping the slot element and the figure caption. For example, after adding `assets/ask-blue-overview.webp`:
+The supplied screenshots are now present and referenced by the case-study pages. For future media replacements, keep paths relative, preserve figure captions, and use the actual image dimensions. A media slot can contain an image as follows:
 
 ```html
 <div class="media-slot" id="media-overview">
@@ -55,7 +55,7 @@ The public narrative uses direct, neutral case-study language, with design owner
 
 ## Publish On GitHub Pages
 
-The initial deployment is the homepage and downloadable resume only. Publish `index.html`, `README.md`, `assets/suyash-krishna-resume.pdf`, and the assets referenced by `index.html`. The case-study HTML files, their unavailable screenshots, source transcript, and internal PDFs are intentionally excluded. The homepage presents project summaries without links to unpublished case studies.
+The homepage now links to the two supplied case studies. Before pushing or deploying them publicly, confirm the public-disclosure checks above. Include the linked case-study HTML files, `images/`, the referenced Agentic Attach PNGs, and the existing homepage assets. Keep alternate drafts, source transcripts, internal PDFs, and macOS `.DS_Store` changes out of this integration commit. Files already tracked in Git are not made private by leaving them out of a new commit.
 
 In repository **Settings > Pages**, select **Deploy from a branch**, choose `main` and the `/(root)` folder, then save. Verify the homepage, images, and resume download using the Pages URL after deployment.
 
@@ -63,4 +63,4 @@ For more case studies, place each in a separate folder with its own `index.html`
 
 ## Checks
 
-Browser validation should cover 320px, 390px, 768px, 1024px, and 1440px widths; the persistent light theme under both system color preferences; keyboard focus; anchor navigation; and print output. Run a fresh accessibility and performance audit after inserting real media, because image sizes and embeds can change layout and load performance.# Portfolio
+Browser validation should cover 320px, 390px, 768px, 1024px, and 1440px widths; the persistent light theme under both system color preferences; keyboard focus; case-study links and return navigation; image loading; anchor navigation; and print output. Run a fresh accessibility and performance audit after inserting real media, because image sizes and embeds can change layout and load performance.
