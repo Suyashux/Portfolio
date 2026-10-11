@@ -63,4 +63,4 @@ For more case studies, place each in a separate folder with its own `index.html`
 
 ## Checks
 
-Browser validation should cover 320px, 390px, 768px, 1024px, and 1440px widths; the persistent light theme under both system color preferences; keyboard focus; anchor navigation; and print output. Run a fresh accessibility and performance audit after inserting real media, because image sizes and embeds can change layout and load performance.
+Browser validation should cover 320px, 390px, 768px, 1024px, and 1440px widths; the persistent light theme under both system color preferences; keyboard focus; anchor navigation; and print output. Run a fresh accessibility and performance audit after inserting real media, because image sizes and embeds can change layout and load performance.# Portfolio
