@@ -1,6 +1,6 @@
 # Suyash Krishna Portfolio
 
-A light, editorial portfolio homepage in [index.html](index.html), with a concise product-design introduction, updated portrait, LinkedIn link, downloadable CV, company logos, screenshot previews and links to two Best Buy Ask Blue AI case studies, and a contact section with Bangalore, email, and phone details. The homepage has no build step, package dependencies, or JavaScript. Its profile images and icons live in `assets/`.
+A light, editorial portfolio homepage in [index.html](index.html), with a concise product-design introduction, updated portrait, LinkedIn link, downloadable CV, company logos, text summaries and links to two Best Buy Ask Blue AI case studies, and a contact section with Bangalore, email, and phone details. The homepage has no build step, package dependencies, or JavaScript. Its profile images and icons live in `assets/`.
 
 The linked case studies are [Progressive login.html](Progressive%20login.html), with screenshots in `images/`, and [untitled folder/agentic-attach-case-study-figma.html](untitled%20folder/agentic-attach-case-study-figma.html), with screenshots beside the page. Both include navigation back to selected work. Existing file paths are preserved. The Agentic Attach page loads its existing fonts from Google Fonts. The alternate Agentic AI draft is not linked from the homepage.
 
